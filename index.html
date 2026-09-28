@@ -32,7 +32,6 @@
         50% { background-position: 100% 50%; }
     }
 
-    /* ===== Фон ===== */
     .stars-bg, .hearts-bg {
         position: fixed;
         inset: 0;
@@ -67,7 +66,6 @@
         100% { transform: translateY(-120px) rotate(360deg); opacity: 0; }
     }
 
-    /* ===== Рабочий стол ===== */
     .desktop {
         position: relative;
         width: 100%;
@@ -75,7 +73,6 @@
         z-index: 5;
     }
 
-    /* Верхняя панель */
     .topbar {
         position: fixed;
         top: 0;
@@ -122,7 +119,6 @@
         font-size: 13px;
     }
 
-    /* ===== Иконки ===== */
     .desktop-icons {
         position: absolute;
         top: 70px;
@@ -184,7 +180,6 @@
         line-height: 1.2;
     }
 
-    /* ===== Окна ===== */
     .window {
         position: absolute;
         background: rgba(25, 25, 45, 0.92);
@@ -202,9 +197,7 @@
         min-width: 280px;
     }
 
-    .window.open {
-        display: flex;
-    }
+    .window.open { display: flex; }
 
     @keyframes windowOpen {
         from { opacity: 0; transform: scale(0.85) translateY(30px); }
@@ -291,7 +284,6 @@
         font-weight: 600;
     }
 
-    /* Галерея */
     .photo-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -342,7 +334,6 @@
 
     .photo-placeholder .emoji { font-size: 32px; }
 
-    /* Плеер */
     .player {
         background: rgba(0, 0, 0, 0.3);
         border-radius: 14px;
@@ -376,7 +367,6 @@
         border-radius: 30px;
     }
 
-    /* Кнопки */
     .love-btn {
         background: linear-gradient(135deg, #ff6b9d, #ff4757);
         color: white;
@@ -403,7 +393,6 @@
         }
     }
 
-    /* Секретное сообщение */
     .secret {
         max-height: 0;
         overflow: hidden;
@@ -426,7 +415,6 @@
         border: 1px solid rgba(255, 107, 157, 0.25);
     }
 
-    /* Летящие сердечки */
     .click-heart {
         position: fixed;
         pointer-events: none;
@@ -440,7 +428,6 @@
         100% { transform: translate(var(--tx), var(--ty)) scale(1.4) rotate(var(--rot)); opacity: 0; }
     }
 
-    /* Интро */
     .intro {
         position: fixed;
         inset: 0;
@@ -508,9 +495,43 @@
         font-size: 17px;
     }
 
-    /* ===== КНОПКА ЗАКРЫТИЯ ВНУТРИ ОКНА (mobile) ===== */
-    .close-bottom-btn {
+    /* Обёртка для кнопок внизу окна */
+    .bottom-actions {
         display: none;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 24px;
+    }
+
+    /* Кнопка закрытия внизу */
+    .close-bottom-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        padding: 16px;
+        background: rgba(255, 95, 87, 0.15);
+        border: 1px solid rgba(255, 95, 87, 0.4);
+        color: #ff8080;
+        border-radius: 14px;
+        font-size: 16px;
+        font-family: inherit;
+        font-weight: 500;
+        cursor: pointer;
+        min-height: 56px;
+        transition: background 0.2s, transform 0.15s;
+        touch-action: manipulation;
+    }
+
+    .close-bottom-btn:active {
+        background: rgba(255, 95, 87, 0.3);
+        transform: scale(0.98);
+    }
+
+    .close-bottom-btn .icon-x {
+        font-size: 22px;
+        line-height: 1;
     }
 
     /* ==========================================================================
@@ -527,7 +548,6 @@
         .topbar-right { display: none; }
         .topbar-title { font-size: 14px; font-weight: 400; }
 
-        /* Иконки — внизу как dock */
         .desktop-icons {
             top: auto;
             bottom: 0;
@@ -562,7 +582,6 @@
 
         .icon-label { font-size: 10px; line-height: 1.1; }
 
-        /* Окна — на весь экран */
         .window {
             top: 0 !important;
             left: 0 !important;
@@ -581,7 +600,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Заголовок — высокий, с крупной кнопкой закрытия */
         .window-header {
             height: calc(56px + env(safe-area-inset-top));
             padding-top: env(safe-area-inset-top);
@@ -599,14 +617,12 @@
             flex-shrink: 0;
         }
 
-        /* Крупные кнопки-кружки */
         .win-btn {
             width: 22px;
             height: 22px;
             position: relative;
         }
 
-        /* Расширяем зону нажатия невидимо */
         .win-btn::before {
             content: '';
             position: absolute;
@@ -628,7 +644,6 @@
             text-overflow: ellipsis;
         }
 
-        /* Пустой блок справа (заменяет control-блок для центрирования) */
         .window-header::after {
             content: '';
             width: 46px;
@@ -643,7 +658,6 @@
 
         .window-body h2 { font-size: 22px; }
 
-        /* Галерея */
         .photo-grid {
             grid-template-columns: 1fr;
             gap: 14px;
@@ -672,36 +686,9 @@
         .intro p { font-size: 15px; }
         .intro .love-btn { width: auto; padding: 16px 45px; }
 
-        /* ПОКАЗЫВАЕМ КНОПКУ ЗАКРЫТИЯ ВНИЗУ ОКНА */
-        .close-bottom-btn {
+        /* Показываем обёртку с кнопками внизу */
+        .bottom-actions {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            padding: 16px;
-            margin-top: 24px;
-            background: rgba(255, 95, 87, 0.15);
-            border: 1px solid rgba(255, 95, 87, 0.4);
-            color: #ff8080;
-            border-radius: 14px;
-            font-size: 16px;
-            font-family: inherit;
-            font-weight: 500;
-            cursor: pointer;
-            min-height: 56px;
-            transition: background 0.2s, transform 0.15s;
-            touch-action: manipulation;
-        }
-
-        .close-bottom-btn:active {
-            background: rgba(255, 95, 87, 0.3);
-            transform: scale(0.98);
-        }
-
-        .close-bottom-btn .icon-x {
-            font-size: 22px;
-            line-height: 1;
         }
     }
 
@@ -712,7 +699,6 @@
         .win-btn { width: 20px; height: 20px; }
     }
 
-    /* Ландшафт */
     @media (max-width: 900px) and (orientation: landscape) {
         .desktop-icons {
             flex-direction: column;
@@ -742,7 +728,6 @@
 <div class="stars-bg" id="starsBg"></div>
 <div class="hearts-bg" id="heartsBg"></div>
 
-<!-- Интро -->
 <div class="intro" id="intro">
     <div class="intro-heart" id="introHeart">❤️</div>
     <h1>У меня есть кое-что для тебя</h1>
@@ -750,7 +735,6 @@
     <button class="love-btn" id="introBtn">Открыть 💝</button>
 </div>
 
-<!-- Рабочий стол -->
 <div class="desktop" id="desktop">
 
     <div class="topbar">
@@ -804,11 +788,13 @@
                 <p>Я знал, что ты нажмёшь... 💖</p>
                 <p>Ты — моё вдохновение, моя радость, мой мир. Спасибо, что ты есть. Я люблю тебя больше, чем все слова на свете могут выразить. 💕</p>
             </div>
-            <!-- Кнопка закрытия внизу — видна только на телефоне -->
-            <button class="close-bottom-btn" data-close="win-love">
-                <span class="icon-x">✕</span>
-                <span>Закрыть и вернуться назад</span>
-            </button>
+            <!-- Кнопки внизу — только на телефоне -->
+            <div class="bottom-actions">
+                <button class="close-bottom-btn" data-close="win-love">
+                    <span class="icon-x">✕</span>
+                    <span>Закрыть и вернуться назад</span>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -835,10 +821,12 @@
                 </div>
             </div>
             <p style="margin-top: 16px; font-size: 13px; color: rgba(255,255,255,0.5);">Нажми на фото, чтобы увеличить 💕</p>
-            <button class="close-bottom-btn" data-close="win-photos">
-                <span class="icon-x">✕</span>
-                <span>Закрыть и вернуться назад</span>
-            </button>
+            <div class="bottom-actions">
+                <button class="close-bottom-btn" data-close="win-photos">
+                    <span class="icon-x">✕</span>
+                    <span>Закрыть и вернуться назад</span>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -864,10 +852,12 @@
                 Люблю тебя, и это навсегда,<br>
                 Сквозь годы, вёрсты и ветра. 💕
             </p>
-            <button class="close-bottom-btn" data-close="win-poem">
-                <span class="icon-x">✕</span>
-                <span>Закрыть и вернуться назад</span>
-            </button>
+            <div class="bottom-actions">
+                <button class="close-bottom-btn" data-close="win-poem">
+                    <span class="icon-x">✕</span>
+                    <span>Закрыть и вернуться назад</span>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -889,10 +879,12 @@
                     Твой браузер не поддерживает аудио.
                 </audio>
             </div>
-            <button class="close-bottom-btn" data-close="win-music">
-                <span class="icon-x">✕</span>
-                <span>Закрыть и вернуться назад</span>
-            </button>
+            <div class="bottom-actions">
+                <button class="close-bottom-btn" data-close="win-music">
+                    <span class="icon-x">✕</span>
+                    <span>Закрыть и вернуться назад</span>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -909,10 +901,12 @@
             <p>Это окно — <span class="highlight">секретное</span>. Здесь я спрятал слова, которые говорю только тебе.</p>
             <p>Ты — моё вдохновение, моя муза, мой лучший друг и моя любовь. Я хочу, чтобы ты знала: <span class="highlight">ты самая лучшая</span>. 💕</p>
             <p>И если когда-нибудь ты забудешь, как сильно тебя любят — просто открой этот сайт снова. ❤️</p>
-            <button class="close-bottom-btn" data-close="win-secret">
-                <span class="icon-x">✕</span>
-                <span>Закрыть и вернуться назад</span>
-            </button>
+            <div class="bottom-actions">
+                <button class="close-bottom-btn" data-close="win-secret">
+                    <span class="icon-x">✕</span>
+                    <span>Закрыть и вернуться назад</span>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -990,14 +984,13 @@ document.querySelectorAll('.icon').forEach(icon => {
     });
 });
 
-/* Закрытие — обрабатываем И кружки, И нижнюю кнопку */
+/* Закрытие окон */
 document.querySelectorAll('[data-close]').forEach(btn => {
     btn.addEventListener('click', (e) => {
         e.stopPropagation();
         const winId = btn.dataset.close;
         const win = document.getElementById(winId);
         
-        // Красивая анимация закрытия
         if (isMobile) {
             win.style.transition = 'transform 0.25s ease, opacity 0.25s ease';
             win.style.transform = 'translateY(100vh)';
@@ -1180,7 +1173,7 @@ const months = ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'и�
 const now = new Date();
 dateInfo.textContent = `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]} · навсегда`;
 
-/* Защита от зума на iOS */
+/* Защита от зума */
 if (isMobile) {
     document.addEventListener('gesturestart', (e) => e.preventDefault());
     document.addEventListener('dblclick', (e) => e.preventDefault(), { passive: false });
